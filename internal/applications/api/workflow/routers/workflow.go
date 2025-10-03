@@ -3,13 +3,19 @@ package routers
 import (
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/workflow/controllers"
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/repository"
-
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(r *gin.RouterGroup, db repository.Storage) {
-	apiRouteGroup := r.Group("/workflow")
+type WorkflowRouter struct {
+	controller *controllers.WorkflowController
+}
 
-	workflowController := controllers.NewWorkflowController(db)
-	apiRouteGroup.GET("/health", workflowController.HealthCheck)
+func NewAuthRouter(db repository.Storage) *WorkflowRouter {
+	return &WorkflowRouter{
+		controller: controllers.NewWorkflowController(db),
+	}
+}
+
+func (r *WorkflowRouter) RegisterRoutes(router *gin.RouterGroup) {
+	router.GET("/health", r.controller.HealthCheck)
 }

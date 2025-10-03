@@ -2,6 +2,7 @@ package api
 
 import (
 	authrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/auth/routers"
+	workflowrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/workflow/routers"
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/config"
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/repository"
 	httplib "github.com/cuonglv-smartosc/golang-boiler-template/pkg/http"
@@ -20,5 +21,6 @@ func InitRoutes(db repository.Storage) *gin.Engine {
 
 	apiRouteGroup := router.Group("/api/v1")
 	authrouters.NewAuthRouter(db).RegisterRoutes(apiRouteGroup.Group("auth"))
+	workflowrouters.NewAuthRouter(db).RegisterRoutes(apiRouteGroup.Group("workflow"))
 	return router
 }
