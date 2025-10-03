@@ -19,6 +19,7 @@ type IAuthController interface {
 	Login(c *gin.Context)
 	RefreshToken(c *gin.Context)
 	GetMe(c *gin.Context)
+	Register(c *gin.Context)
 }
 
 type AuthController struct {
@@ -98,4 +99,21 @@ func (authController *AuthController) GetMe(c *gin.Context) {
 	}
 
 	resp.OK(c, info)
+}
+
+func (authController *AuthController) Register(c *gin.Context) {
+	var req dtos.RegisterRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		if errors.HandleValidationError(c, err) {
+			return
+		}
+	}
+
+	response, err := authController.service.Register(&req)
+	if err != nil {
+		errors.HandleCustomError(c, err, "", "")
+		return
+	}
+
+	resp.OK(c, response)
 }

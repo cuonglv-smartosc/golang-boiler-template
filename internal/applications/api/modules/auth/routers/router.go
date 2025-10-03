@@ -22,6 +22,7 @@ func (r *AuthRouter) RegisterRoutes(router *gin.RouterGroup) {
 
 	router.GET("/health", r.controller.HealthCheck)
 	router.POST("/login", r.controller.Login)
+	router.POST("/register", r.controller.Register)
 	router.POST("/refresh", r.controller.RefreshToken)
 	router.GET("/me", middleware.Authenticate(), r.controller.GetMe)
 }

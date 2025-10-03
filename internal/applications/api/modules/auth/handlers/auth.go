@@ -3,11 +3,13 @@ package handlers
 import (
 	"context"
 	"strconv"
+	"strings"
 
 	customErrors "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/errors"
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/modules/auth/dtos"
 
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/repository"
+	repository_models "github.com/cuonglv-smartosc/golang-boiler-template/internal/repository/models"
 	"github.com/cuonglv-smartosc/golang-boiler-template/pkg/auth"
 )
 
@@ -74,6 +76,33 @@ func (s *AuthService) GetUserByID(id int64) (*dtos.UserInfo, error) {
 	}
 
 	return &dtos.UserInfo{
+		ID:    user.ID,
+		Email: user.Email,
+		Roles: []string{"user"},
+	}, nil
+}
+
+func (s *AuthService) Register(req *dtos.RegisterRequest) (*dtos.RegisterResponse, error) {
+	if _, err := s.db.GetUserByEmail(context.Background(), req.Email); err == nil {
+		return nil, customErrors.NewBusinessLogicError("EMAIL_EXISTS", "Email already registered")
+	}
+
+	hashed, err := auth.HashPassword(req.Password)
+	if err != nil {
+		return nil, customErrors.NewAuthError("HASH_FAILED", "Failed to hash password")
+	}
+
+	user := &repository_models.User{
+		Email:       strings.ToLower(req.Email),
+		PhoneNumber: req.PhoneNumber,
+		Password:    hashed,
+	}
+
+	if err := s.db.CreateUser(user); err != nil {
+		return nil, customErrors.NewBusinessLogicError("CREATE_USER_FAILED", "Failed to create user")
+	}
+
+	return &dtos.RegisterResponse{
 		ID:    user.ID,
 		Email: user.Email,
 		Roles: []string{"user"},

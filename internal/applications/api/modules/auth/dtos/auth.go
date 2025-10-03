@@ -27,3 +27,15 @@ type RefreshTokenResponse struct {
 	RefreshToken string `json:"refresh_token"`
 	ExpiresAt    int64  `json:"expires_at"`
 }
+
+type RegisterRequest struct {
+	Email       string `json:"email" binding:"required,email"`
+	Password    string `json:"password" binding:"required,min=6"`
+	PhoneNumber string `json:"phone_number" binding:"omitempty"`
+}
+
+type RegisterResponse struct {
+	ID    int64    `json:"id"`
+	Email string   `json:"email"`
+	Roles []string `json:"roles"`
+}

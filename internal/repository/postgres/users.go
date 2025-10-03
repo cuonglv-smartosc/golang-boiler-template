@@ -40,6 +40,9 @@ func (d *Database) GetUserByID(ctx context.Context, id int64) (*models.User, err
 }
 
 func (d *Database) CreateUser(user *models.User) error {
+	if err := d.Gorm.Create(user).Error; err != nil {
+		return fmt.Errorf("failed to create user: %w", err)
+	}
 	return nil
 }
 
