@@ -53,20 +53,20 @@ type RegistrationFactory struct {
 }
 
 type RegistrationItem struct {
-	ID                 int64
-	RegistrationId     int64
-	ThaiName           string
-	EngName            string
-	Category           string
-	Subcategory        string
-	SkuCount           string
-	Exclusivity        bool
-	MarkoSale          bool
-	LotusSale          bool
-	TargetCustomerType string
-	AvailableChannels  string
-	USP                string
-	AvailableMarket    string
+	ID                 int64  `json:"id" gorm:"primaryKey,autoIncrement"`
+	RegistrationId     int64  `json:"registration_id"`
+	ThaiName           string `json:"thai_name"`
+	EngName            string `json:"eng_name"`
+	Category           string `json:"category"`
+	SubCategory        string `json:"sub_category"`
+	SkuCount           string `json:"sku_count"`
+	Exclusivity        bool   `json:"exclusivity"`
+	MarkoSale          bool   `json:"marko_sale"`
+	LotussSale         bool   `json:"lotuss_sale"`
+	TargetCustomerType string `json:"target_customer_type"`
+	AvailableChannels  string `json:"available_channels"`
+	USP                string `json:"usp"`
+	AvailableMarket    string `json:"available_market"`
 }
 
 type RegistrationItemImage struct {
