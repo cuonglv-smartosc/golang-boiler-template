@@ -1,8 +1,8 @@
 package api
 
 import (
-	authrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/auth/routers"
-	workflowrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/workflow/routers"
+	authrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/modules/auth/routers"
+	workflowrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/modules/workflow/routers"
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/config"
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/repository"
 	httplib "github.com/cuonglv-smartosc/golang-boiler-template/pkg/http"

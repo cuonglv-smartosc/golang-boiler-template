@@ -29,7 +29,7 @@ type Config struct {
 	Jwt struct {
 		Secret          string `mapstructure:"secret"`
 		TimeDurationJwt string `mapstructure:"time_duration_jwt"`
-	} `mapstructure:"jwt"`
+	} `mapstructure:"auth"`
 
 	Redis struct {
 		URL      string `mapstructure:"url"`

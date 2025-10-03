@@ -3392,14 +3392,14 @@ const docTemplate = `{
                     "additionalProperties": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/utils.Reward"
+                            "$ref": "#/definitions/errors.Reward"
                         }
                     }
                 },
                 "discount_on_total_order": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/utils.Reward"
+                        "$ref": "#/definitions/errors.Reward"
                     }
                 },
                 "total_discount": {
@@ -3770,7 +3770,7 @@ const docTemplate = `{
                 }
             }
         },
-        "utils.Reward": {
+        "errors.Reward": {
             "type": "object",
             "additionalProperties": true
         }

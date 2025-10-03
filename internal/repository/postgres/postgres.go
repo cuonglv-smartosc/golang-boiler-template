@@ -3,6 +3,7 @@ package postgres
 import (
 	"errors"
 	"fmt"
+	"github.com/cuonglv-smartosc/golang-boiler-template/internal/repository/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -35,7 +36,9 @@ func New(url string, log bool) (*Database, error) {
 func Setup(db *Database) error {
 	conn := db.Gorm.Begin()
 
-	if err := conn.AutoMigrate(); err != nil {
+	if err := conn.AutoMigrate(
+		&models.User{},
+	); err != nil {
 		return fmt.Errorf("failed to make auto migrations: %w", err)
 	}
 

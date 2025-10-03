@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/workflow/handlers"
+	"github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api/modules/workflow/handlers"
 	"net/http"
 
 	"github.com/cuonglv-smartosc/golang-boiler-template/internal/repository"
