@@ -1,0 +1,25 @@
+log_level: debug
+
+port: 8420
+
+gin:
+  mode: debug # Possible values: "release", "debug"
+
+swagger:
+  hostname: localhost:8420
+
+sentry:
+  dsn:
+  sample_rate: 1
+
+database:
+  url: postgresql://postgres:v8hlDV0yMAHHlIurYupj@0.0.0.0:5432/golang?sslmode=disable
+  log: false
+
+jwt:
+  secret: MeMXd0WsFHH3zBQg7RN72w==
+  time_duration_jwt: 1500
+
+redis:
+  url: localhost:6379
+  password: nxc9win4me5s613sie4a

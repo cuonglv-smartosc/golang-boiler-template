@@ -2,8 +2,7 @@ package main
 
 import (
 	"context"
-
-	"github.com/cuonglv-smartosc/golang-boiler-template/internal/modules"
+	"github.com/cuonglv-smartosc/golang-boiler-template/internal/applications/api"
 )
 
 // @title   Loyalty Backend
@@ -22,5 +21,5 @@ import (
 // @name Authorization
 
 func main() {
-	modules.NewApp().Run(context.Background())
+	api.NewApp().Run(context.Background())
 }

@@ -1,16 +1,12 @@
-package modules
+package applications
 
 import (
 	"context"
-	"golang-boiler-template/pkg/http"
 	"os"
 
 	"github.com/cuonglv-smartosc/golang-boiler-template/pkg/cache"
-	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 
-	authrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/modules/auth/routers"
-	workflowrouters "github.com/cuonglv-smartosc/golang-boiler-template/internal/modules/workflow/routers"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/cuonglv-smartosc/golang-boiler-template/docs"
@@ -62,7 +58,8 @@ func InitDatabase() {
 
 func InitRedis() {
 	cache.RedisClient = &cache.Cache{redis.NewClient(&redis.Options{
-		Addr: config.Default.Redis.URL,
+		Addr:     config.Default.Redis.URL,
+		Password: config.Default.Redis.Password,
 	})}
 	_, err := cache.RedisClient.Ping(context.Background()).Result()
 	if err != nil {
@@ -72,13 +69,4 @@ func InitRedis() {
 
 func InitSwaggerInfo() {
 	docs.SwaggerInfo.Host = config.Default.Swagger.Hostname
-}
-
-func InitRoutes() *gin.Engine {
-	engine := gin.New()
-	engine.Use(http.CORSMiddleware())
-
-	workflowrouters.RegisterRoutes(engine)
-	authrouters.RegisterRoutes(engine)
-	return engine
 }

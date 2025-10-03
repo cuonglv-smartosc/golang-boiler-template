@@ -3,6 +3,7 @@ package http
 import (
 	"context"
 	"errors"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"sync"
 
@@ -14,11 +15,11 @@ type Server interface {
 }
 
 type api struct {
-	router http.Handler
+	router *gin.Engine
 	port   string
 }
 
-func NewHTTPServer(router http.Handler, port string) Server {
+func NewHTTPServer(router *gin.Engine, port string) Server {
 	return &api{
 		router: router,
 		port:   port,
