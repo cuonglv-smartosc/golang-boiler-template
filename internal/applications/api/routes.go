@@ -18,6 +18,7 @@ func InitRoutes(db repository.Storage) *gin.Engine {
 	}
 
 	router.Use(httplib.CORSMiddleware())
+	router.Use(httplib.RequestLogger())
 
 	apiRouteGroup := router.Group("/api/v1")
 	authrouters.NewAuthRouter(db).RegisterRoutes(apiRouteGroup.Group("auth"))

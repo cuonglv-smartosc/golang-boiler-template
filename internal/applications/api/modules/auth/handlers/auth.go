@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"net/http"
 	"strconv"
 	"strings"
 
@@ -84,7 +85,7 @@ func (s *AuthService) GetUserByID(id int64) (*dtos.UserInfo, error) {
 
 func (s *AuthService) Register(req *dtos.RegisterRequest) (*dtos.RegisterResponse, error) {
 	if _, err := s.db.GetUserByEmail(context.Background(), req.Email); err == nil {
-		return nil, customErrors.NewBusinessLogicError("EMAIL_EXISTS", "Email already registered")
+		return nil, customErrors.NewCustomError(http.StatusBadRequest, "EMAIL_EXISTS", "Email already registered", nil)
 	}
 
 	hashed, err := auth.HashPassword(req.Password)
